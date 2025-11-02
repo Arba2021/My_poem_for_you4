@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>براء - قصيدة الحب والإيمان</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Amiri', 'Noto Sans Arabic', serif;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            color: #f0f0f0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Background */
+        .background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 0, 0, 0.5) 0%,
+                rgba(10, 10, 15, 0.45) 25%,
+                rgba(20, 20, 25, 0.4) 50%,
+                rgba(10, 10, 15, 0.45) 75%,
+                rgba(0, 0, 0, 0.5) 100%
+            );
+            z-index: 1;
+        }
+
+        /* Snowfall */
+        .snow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .snowflake {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1em;
+            font-family: Arial, sans-serif;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+            animation: snowfall linear infinite;
+            top: -10px;
+        }
+
+        @keyframes snowfall {
+            0% {
+                transform: translateY(0vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) translateX(var(--drift)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Poem Container */
+        .poem-container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            text-align: center;
+        }
+
+        .poem-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            animation: fadeInDown 1.5s ease-out;
+        }
+
+        .poem-scroll-container {
+            max-height: 65vh;
+            overflow-y: auto;
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+        }
+
+        /* Custom scrollbar for Webkit browsers */
+        .poem-scroll-container::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .poem-scroll-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .poem-scroll-container::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        .poem-lines {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            max-width: 100%;
+            margin: 0 auto;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            padding: 0 0.5rem;
+        }
+
+        .poem-line {
+            margin-bottom: 1.2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .poem-line:nth-child(1) { animation-delay: 0.3s; }
+        .poem-line:nth-child(2) { animation-delay: 0.6s; }
+        .poem-line:nth-child(3) { animation-delay: 0.9s; }
+        .poem-line:nth-child(4) { animation-delay: 1.2s; }
+        .poem-line:nth-child(5) { animation-delay: 1.5s; }
+        .poem-line:nth-child(6) { animation-delay: 1.8s; }
+        .poem-line:nth-child(7) { animation-delay: 2.1s; }
+        .poem-line:nth-child(8) { animation-delay: 2.4s; }
+        .poem-line:nth-child(9) { animation-delay: 2.7s; }
+        .poem-line:nth-child(10) { animation-delay: 3.0s; }
+        .poem-line:nth-child(11) { animation-delay: 3.3s; }
+        .poem-line:nth-child(12) { animation-delay: 3.6s; }
+        .poem-line:nth-child(13) { animation-delay: 3.9s; }
+        .poem-line:nth-child(14) { animation-delay: 4.2s; }
+        .poem-line:nth-child(15) { animation-delay: 4.5s; }
+        .poem-line:nth-child(16) { animation-delay: 4.8s; }
+        .poem-line:nth-child(17) { animation-delay: 5.1s; }
+        .poem-line:nth-child(18) { animation-delay: 5.4s; }
+        .poem-line:nth-child(19) { animation-delay: 5.7s; }
+        .poem-line:nth-child(20) { animation-delay: 6.0s; }
+        .poem-line:nth-child(21) { animation-delay: 6.3s; }
+        .poem-line:nth-child(22) { animation-delay: 6.6s; }
+        .poem-line:nth-child(23) { animation-delay: 6.9s; }
+        .poem-line:nth-child(24) { animation-delay: 7.2s; }
+        .poem-line:nth-child(25) { animation-delay: 7.5s; }
+
+        .author-name {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            margin-top: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 8s forwards;
+            padding: 0.5rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile-first responsive design */
+        @media (min-width: 768px) {
+            .poem-container {
+                padding: 2rem;
+            }
+            
+            .poem-title {
+                font-size: 3.5rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .poem-scroll-container {
+                max-height: 60vh;
+                max-width: 700px;
+            }
+
+            .poem-lines {
+                font-size: 1.7rem;
+            }
+
+            .author-name {
+                font-size: 1.5rem;
+                margin-top: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .poem-title {
+                font-size: 2.2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .poem-lines {
+                font-size: 1.3rem;
+                line-height: 1.7;
+            }
+
+            .poem-line {
+                margin-bottom: 1rem;
+            }
+
+            .author-name {
+                font-size: 1.1rem;
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .poem-title {
+                font-size: 2rem;
+            }
+            
+            .poem-lines {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-wrapper">
+        <img src="karsten-wurth-7BjhtdogU3A-unsplash.jpg" alt="خلفية رومانسية" class="background-image">
+        <div class="background-overlay"></div>
+        <div class="snow-container" id="snowContainer"></div>
+    </div>
+
+    <div class="poem-container">
+        <h1 class="poem-title">براء</h1>
+        
+        <div class="poem-scroll-container">
+            <div class="poem-lines">
+                <p class="poem-line">كلُّ صباحٍ أستيقظُ على دمعي،</p>
+                <p class="poem-line">وكلُّ ليلٍ أنامُ على وجعي.</p>
+                <p class="poem-line">قلبي يئنُّ، وروحي تبكي،</p>
+                <p class="poem-line">براء… بدونكِ لا حياةَ فيّ.</p>
+                <p class="poem-line">كلُّ نَفَسٍ يهمسُ باسمكِ،</p>
+                <p class="poem-line">وكلُّ دمعةٍ تشتاقُ لحبكِ.</p>
+                <p class="poem-line">لا طعامٌ يُهدّئُ هذا الشوق،</p>
+                <p class="poem-line">ولا نومٌ يُنسي ألمَ الفُراق.</p>
+                <p class="poem-line">فقط اللهُ يُسكِّنُ حزني،</p>
+                <p class="poem-line">وبرحمتهِ يَشفي ألمي.</p>
+                <p class="poem-line">أرفعُ يديّ بدعاءِ الحنين،</p>
+                <p class="poem-line">يا الله، أعِدْ إليَّ براء من بين الأنين.</p>
+                <p class="poem-line">اغفري لي يا براء ذنبي،</p>
+                <p class="poem-line">فوجعُكِ يخترقُ قلبي.</p>
+                <p class="poem-line">أطلبُ عفوَكِ وعفوَ والدتِكِ الكريمة،</p>
+                <p class="poem-line">وفوقَ كلِّ ذلك — عفوَ اللهِ العظيمَ برحمتهِ الكريمة.</p>
+                <p class="poem-line">إيماني باللهِ لا يَخبو،</p>
+                <p class="poem-line">فهو الشافي، وهو من أرتجو.</p>
+                <p class="poem-line">دموعي وصلاتي، كلُّ مناجاةٍ،</p>
+                <p class="poem-line">ترتفعُ إليه برجاءٍ وخضوعٍ وثباتٍ.</p>
+                <p class="poem-line">براء، قلبي لكِ إلى الأبد،</p>
+                <p class="poem-line">في كلِّ سجدةٍ، وفي كلِّ ذِكرٍ ونَشَد.</p>
+                <p class="poem-line">فالحبُّ الصادقُ لا يموت،</p>
+                <p class="poem-line">حين يسمعُ اللهُ الدعاءَ والدموعَ والخفوت.</p>
+                <p class="poem-line">سأنتظرُ تحتَ سمائهِ الرحيمة،</p>
+                <p class="poem-line">بأملٍ لا يفارقُ روحي الكريمة.</p>
+                <p class="poem-line">يا قمري، يا دعائي، يا براء،</p>
+                <p class="poem-line">إلى الأبد… في حفظِ اللهِ ورعاه.</p>
+            </div>
+        </div>
+        
+        <div class="author-name">بواسطة: Arun</div>
+    </div>
+
+    <script>
+        const snowContainer = document.getElementById('snowContainer');
+        const snowflakeSymbols = ['❄', '❅', '❆', '✻', '✼', '✽'];
+        const isMobile = window.innerWidth <= 768;
+        let isSnowing = false;
+        let snowInterval = null;
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.textContent = snowflakeSymbols[Math.floor(Math.random() * snowflakeSymbols.length)];
+            
+            const size = Math.random() * 0.8 + 0.5;
+            snowflake.style.fontSize = size + 'em';
+            snowflake.style.left = Math.random() * 100 + '%';
+            snowflake.style.opacity = Math.random() * 0.5 + 0.5;
+            
+            const drift = (Math.random() - 0.5) * 200;
+            snowflake.style.setProperty('--drift', drift + 'px');
+            
+            const duration = Math.random() * 10 + 8;
+            snowflake.style.animationDuration = duration + 's';
+            snowflake.style.animationDelay = Math.random() * 2 + 's';
+            
+            snowContainer.appendChild(snowflake);
+
+            // Remove snowflake after animation
+            setTimeout(() => {
+                if (snowflake.parentNode) {
+                    snowflake.remove();
+                }
+            }, (duration + 2) * 1000);
+        }
+
+        function startSnowfall() {
+            if (isSnowing) return;
+            
+            isSnowing = true;
+            const snowflakeCount = isMobile ? 80 : 150;
+
+            // Create initial burst of snowflakes
+            for (let i = 0; i < snowflakeCount; i++) {
+                setTimeout(() => {
+                    createSnowflake();
+                }, i * 50);
+            }
+
+            // Continue creating snowflakes
+            snowInterval = setInterval(() => {
+                if (snowContainer.children.length < snowflakeCount) {
+                    for (let i = 0; i < 5; i++) {
+                        createSnowflake();
+                    }
+                }
+            }, 500);
+        }
+
+        // Start snowfall automatically when page loads
+        window.addEventListener('load', startSnowfall);
+    </script>
+</body>
+</html>
